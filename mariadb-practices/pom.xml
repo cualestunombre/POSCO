@@ -14,7 +14,18 @@
 	<maven.compiler.source>17</maven.compiler.source>
 	<maven.compiler.target>17</maven.compiler.target>
   </properties>
+  <dependencies>
+	<dependency>
+	    <groupId>org.mariadb.jdbc</groupId>
+	    <artifactId>mariadb-java-client</artifactId>
+	    <version>3.0.11</version>
+  </dependency>
+  
+
+  </dependencies>
+  
   <modules>
   	<module>jdbc-practice</module>
   </modules>
+  
 </project>
