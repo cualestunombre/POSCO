@@ -80,6 +80,7 @@ public class EmaillistDao {
 			// 4. SQL 실행
 			
 			int count = pstmt.executeUpdate();
+	
 			
 			//5. 결과 처리
 			return count == 1;
