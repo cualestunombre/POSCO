@@ -72,7 +72,7 @@ public class EmailListApp {
 		dao.findAll()
 			.stream()
 			.forEach(e->{
-			System.out.println("이름:"+e.getFirstName()+e.getLastName()+" 이메일:"+e.getEamil());
+			System.out.println("이름:"+e.getFirstName()+e.getLastName()+" 이메일:"+e.getEmail());
 		});
 
 		

@@ -1,4 +1,4 @@
-package emaillist.dao;
+package emaillist1.dao;
 
 public class EmaillistVo {
 	private String firstName; 
