@@ -1,6 +1,6 @@
-<%@ page import="emaillist1.dao.EmaillistVo"%>
+<%@ page import="emaillist.dao.EmaillistVo"%>
 <%@ page import="java.util.List"%>
-<%@ page import="emaillist1.dao.EmaillistDao"%>
+<%@ page import="emaillist.dao.EmaillistDao"%>
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
