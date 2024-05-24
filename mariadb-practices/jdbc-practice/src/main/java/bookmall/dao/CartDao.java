@@ -29,34 +29,14 @@ public class CartDao {
 		return conn;
 	}
 	
-	private String queryBookTitle(Long bookId) {
-	    String sql = "SELECT title FROM book WHERE no = ?";
-	    String title = null;
 
-	    try (
-	        Connection conn = getConnection();
-	        PreparedStatement pstmt = conn.prepareStatement(sql)
-	    ) {
-	        pstmt.setLong(1, bookId);
-
-	        try (ResultSet set = pstmt.executeQuery()) {
-	            if (set.next()) {
-	                title = set.getString(1);
-	            }
-	        }
-	    } catch (SQLException e) {
-	        System.out.println("SQL 예외 발생: " + e);
-	    }
-
-	    return title;
-	}
 
 	
 	
 	public void insert(CartVo vo) {
 		long result = 0;
 		
-		String sql = "insert into cart (book_no,user_no,book_title,quantity) values(?,?,?,?)";
+		String sql = "insert into cart (book_no,user_no,quantity) values(?,?,?)";
 		String countSql = "select last_insert_id() from dual";
 		try(
 				Connection conn = getConnection();
@@ -64,12 +44,10 @@ public class CartDao {
 				PreparedStatement pstmt2 = conn.prepareStatement(countSql);
 				){
 			
-			String title = queryBookTitle(vo.getBookNo());
-			vo.setBookTitle(title);
+	
 			pstmt1.setLong(1, vo.getBookNo());
 			pstmt1.setLong(2, vo.getUserNo());
-			pstmt1.setString(3, vo.getBookTitle());
-			pstmt1.setInt(4, vo.getQuantity());
+			pstmt1.setInt(3, vo.getQuantity());
 			
 			
 			
@@ -95,8 +73,8 @@ public class CartDao {
 	public List<CartVo> findByUserNo(Long no) {
 		List<CartVo> result = new ArrayList<>();
 		ResultSet set = null;
-		String sql = "select book_no, user_no, book_title, quantity" +
-				 " from cart where user_no = ?";		
+		String sql = "select c.book_no, c.user_no, b.title, c.quantity" +
+				 " from cart c inner join book b on c.book_no = b.no where c.user_no = ?";		
 		try(
 				Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);

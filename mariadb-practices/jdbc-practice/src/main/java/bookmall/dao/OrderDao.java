@@ -31,27 +31,7 @@ public class OrderDao {
 		return conn;
 	}
 	
-	private String queryBookTitle(Long bookId) {
-	    String sql = "SELECT title FROM book WHERE no = ?";
-	    String title = null;
 
-	    try (
-	        Connection conn = getConnection();
-	        PreparedStatement pstmt = conn.prepareStatement(sql)
-	    ) {
-	        pstmt.setLong(1, bookId);
-
-	        try (ResultSet set = pstmt.executeQuery()) {
-	            if (set.next()) {
-	                title = set.getString(1);
-	            }
-	        }
-	    } catch (SQLException e) {
-	        System.out.println("SQL 예외 발생: " + e);
-	    }
-
-	    return title;
-	}
 
 	
 	public void insert(OrderVo vo) {
@@ -92,7 +72,7 @@ public class OrderDao {
 	public void insertBook(OrderBookVo vo) {
 		long result = 0;
 		
-		String sql = "insert into orders_book (orders_no,book_no,book_title,quantity,price) values(?,?,?,?,?)";
+		String sql = "insert into orders_book (orders_no,book_no,quantity,price) values(?,?,?,?)";
 		String countSql = "select last_insert_id() from dual";
 		try(
 				Connection conn = getConnection();
@@ -100,13 +80,11 @@ public class OrderDao {
 				PreparedStatement pstmt2 = conn.prepareStatement(countSql);
 				){
 			
-			String bookTitle = queryBookTitle(vo.getBookNo());
-			vo.setBookTitle(bookTitle);
+
 			pstmt1.setLong(1, vo.getOrderNo());
 			pstmt1.setLong(2, vo.getBookNo());
-			pstmt1.setString(3, vo.getBookTitle());
-			pstmt1.setInt(4, vo.getQuantity());
-			pstmt1.setInt(5, vo.getPrice());
+			pstmt1.setInt(3, vo.getQuantity());
+			pstmt1.setInt(4, vo.getPrice());
 			
 			int count = pstmt1.executeUpdate();
 			
@@ -158,7 +136,7 @@ public class OrderDao {
 		return null;
 	}
 
-	public List<OrderBookVo> findBooksByNoAndUserNo(Long bookNo, Long userNo) {
+	public List<OrderBookVo> findBooksByNoAndUserNo(Long orderNo, Long userNo) {
 		List<OrderBookVo> result = new ArrayList<>();
 		
 //		private Long orderNo;
@@ -166,15 +144,16 @@ public class OrderDao {
 //		private String bookTitle;
 //		private int quantity;
 //		private int price;
-		String sql = "select a.orders_no, a.book_no, a.book_title, a.quantity, a.price " +
-				 " from orders_book a inner join orders b on a.orders_no = b.no where a.orders_no = ? and b.user_no = ? ";		
+		String sql = "select a.orders_no, a.book_no, c.title, a.quantity, a.price " +
+				 " from orders_book a inner join orders b on a.orders_no = b.no "
+				 + " inner join book c on c.no = a.book_no where a.orders_no = ? and b.user_no = ? ";		
 		try(
 				Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
 				){
 			
-			pstmt.setLong(1, bookNo);
+			pstmt.setLong(1, orderNo);
 			pstmt.setLong(2, userNo);
 			ResultSet set = pstmt.executeQuery();
 
