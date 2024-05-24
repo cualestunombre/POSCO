@@ -23,6 +23,6 @@
 		</tr>
 	</table>
 	</form>
-	<a href="/guestbook1">메인으로 돌아가기</a>
+	<a href="/guestbook">메인으로 돌아가기</a>
 </body>
 </html>
