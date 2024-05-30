@@ -14,11 +14,11 @@
         <c:import url="/WEB-INF/views/includes/header.jsp" />
         <div id="content">
             <div id="board">
-            	<c:if test="${key != null }">
+            	<c:if test='${key != null and key != "" }'>
             		<p>${key}에 대한 검색결과</p>
             	</c:if>
             	
-            	<c:if test="${key != null }">
+            	<c:if test='${key != null and key != "" }'>
             		<a href="/mysite2/board">검색종료</a>
             	</c:if>
             	<a href="/"></a>
