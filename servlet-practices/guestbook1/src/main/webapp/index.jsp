@@ -3,7 +3,7 @@
 <%@ page import="guestbook.dao.*"%>
 <%@ page import="java.util.*"%>
 <%
-    GuestbookDao dao = new GuestbookDao();
+	GuestbookDao dao = new GuestbookDao();
     List<GuestbookVo> list = dao.findAll();
 %>
 <html>

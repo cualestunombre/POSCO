@@ -3,7 +3,7 @@
 <%@ page import="guestbook.dao.*"%>
 <%@ page import="java.util.*"%>
 <%
-	request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 	String no = request.getParameter("no");
 
 	String password = request.getParameter("password");
@@ -17,5 +17,4 @@
 	}
 	
 	response.sendRedirect("/guestbook1");
-	
 %>

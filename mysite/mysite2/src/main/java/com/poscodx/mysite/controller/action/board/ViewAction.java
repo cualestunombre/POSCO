@@ -17,7 +17,8 @@ public class ViewAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    Long boardNo = Long.parseLong(request.getParameter("no"));
-
+	    String pageNo = request.getParameter("page");
+	    
 	    // 쿠키 확인 및 조회수 증가 로직
 	    boolean hasCookie = false;
 	    Cookie[] cookies = request.getCookies();
@@ -41,7 +42,8 @@ public class ViewAction implements Action {
 	    // 게시글 데이터 조회 및 JSP 포워딩
 	    List<BoardVo> vo = new BoardDao().findBoardByNo(boardNo);
 	    request.setAttribute("vo", vo.get(0));
-
+	    request.setAttribute("page", pageNo);
+	    
 	    request
 	            .getRequestDispatcher("/WEB-INF/views/board/view.jsp")
 	            .forward(request, response);

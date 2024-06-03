@@ -20,5 +20,7 @@
   
   <modules>
   	<module>hello-spring</module>
+  	<module>emaillist3</module>
+  	<module>mysite3</module>
   </modules>
 </project>

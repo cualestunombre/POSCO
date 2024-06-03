@@ -18,8 +18,7 @@ import guestbook.dao.GuestbookVo;
  */
 public class GuestbookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
- 
+	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
