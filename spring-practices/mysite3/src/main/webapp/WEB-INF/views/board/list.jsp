@@ -22,7 +22,7 @@
             		<a href="/mysite2/board">검색종료</a>
             	</c:if>
             	<a href="/"></a>
-                <form id="search_form" action="${pageContext.servletContext.contextPath}/board" method="post">
+                <form id="search_form" action="${pageContext.servletContext.contextPath}/board" method="get">
                     <input type="text" id="kwd" name="kwd" value="${key}">
                     <input type="submit" value="찾기">
                 </form>
@@ -42,14 +42,14 @@
                                 <c:if test="${item.depth != 0}">
                                     <img src='${pageContext.servletContext.contextPath}/assets/images/reply.png'>
                                 </c:if>
-                                <a href="${pageContext.servletContext.contextPath}/board?a=view&no=${item.no}&page=${page}">${item.title}</a>
+                                <a href="${pageContext.servletContext.contextPath}/board/${item.no}?page=${page}">${item.title}</a>
                             </td>
                             <td>${item.name}</td>
                             <td>${item.hit}</td>
                             <td>${item.regDate}</td>
                             <td>
                                 <c:if test="${not empty sessionScope.authUser and sessionScope.authUser.no eq item.userNo}">
-                                    <a href="${pageContext.servletContext.contextPath}/board?a=delete&no=${item.no}" class="del">삭제</a>
+                                    <a href="${pageContext.servletContext.contextPath}/board/delete?no=${item.no}" class="del">삭제</a>
                                 </c:if>
                             </td>
                         </tr>
@@ -99,7 +99,7 @@
                 
                 <div class="bottom">
                     <c:if test="${not empty sessionScope.authUser}">
-                        <a href="${pageContext.servletContext.contextPath}/board?a=writeForm" id="new-book">글쓰기</a>
+                        <a href="${pageContext.servletContext.contextPath}/board/write" id="new-book">글쓰기</a>
                     </c:if>
                 </div>
             </div>

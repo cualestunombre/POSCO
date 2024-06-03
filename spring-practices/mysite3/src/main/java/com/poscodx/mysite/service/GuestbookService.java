@@ -18,14 +18,18 @@ public class GuestbookService {
 	}
 	
 	public List<GuestbookVo> getContentsList(){
-		return null;
+		return guestbookRepository.findAll();
 	}
 	
 	public void deleteContents(Long no, String password) {
-		
+		guestbookRepository.deleteByNoAndPassword(no, password);
 	}
 	
 	public void addContents(GuestbookVo vo) {
-		
+		guestbookRepository.insert(vo);
+	}
+
+	public List<GuestbookVo> findAll() {
+		return guestbookRepository.findAll();
 	}
 }

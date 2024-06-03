@@ -35,10 +35,10 @@
                 <div class="bottom">
                     <a href="${pageContext.servletContext.contextPath }/board?page=${page}">글목록</a>
                     <c:if test="${not empty sessionScope.authUser and sessionScope.authUser.no eq vo.userNo}">
-                        <a href="${pageContext.servletContext.contextPath }/board?a=updateForm&no=${vo.no}">글수정</a>
+                        <a href="${pageContext.servletContext.contextPath }/board/update?no=${vo.no}">글수정</a>
                     </c:if>
                     <c:if test="${not empty sessionScope.authUser}">
-                        <a href="${pageContext.servletContext.contextPath }/board?a=replyForm&no=${vo.no}">답글</a>
+                        <a href="${pageContext.servletContext.contextPath }/board/reply?no=${vo.no}">답글</a>
                     </c:if>
                 </div>
             </div>
