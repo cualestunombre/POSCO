@@ -1,6 +1,7 @@
 package com.poscodx.mysite.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.Cookie;
@@ -38,34 +39,16 @@ public class BoardController {
 	
 	@GetMapping(value= {"","/"})
 	public String guestbook(Model model,@RequestParam(defaultValue="1",required=false) int page,@RequestParam(required=false) String kwd) {	
-		List<BoardVo> voList = null;
-		System.out.println("sdsd");
-		
-		int base = (page-1)/5;
-		final int totalPage;
-		
+		Map<String,Object> map = null;
 		if (kwd == null || kwd.equals("")) {
-			voList = boardService.findBoardByPage(page);
-			totalPage = boardService.getTotalPage();
+			map = boardService.getContentsList(page);
 	
-			
 	
 		}else {
-			voList = boardService.findBoardByPageAndKeyword(page, kwd);
-			totalPage = boardService.getTotalPageByKeword(kwd);
+			map = boardService.getContentsList(page, kwd);
 		}
 		
-		List<Page> pages = List.of(1,2,3,4,5).stream().map(e->{
-			Page p = new Page();
-			p.setPage(e + 5*base);
-			p.setMovable(e + 5*base <= totalPage);
-			return p;
-		}).toList();
-		
-		model.addAttribute("list", voList);
-		model.addAttribute("page",page);
-		model.addAttribute("pages", pages);
-		model.addAttribute("maxPage",totalPage);
+		model.addAllAttributes(map);
 		model.addAttribute("key",kwd);
 		
 		return "board/list";
@@ -75,11 +58,12 @@ public class BoardController {
 	@PostMapping(value= {"","/"})
 	public String write(@ModelAttribute BoardVo vo, @RequestParam(required=false) Long parentNo,HttpSession session) {
 		UserVo userVo  = (UserVo) session.getAttribute("authUser");
+		vo.setUserNo(userVo.getNo());
 		if (parentNo == null) {
-			boardService.writeDefault(vo,userVo.getNo());
+			boardService.addContents(vo);
 		}else {
 
-			boardService.writeWithGroup(vo,userVo.getNo(),parentNo);
+			boardService.addContents(vo,parentNo);
 		}
 		
 		
@@ -107,10 +91,9 @@ public class BoardController {
 	        response.addCookie(cookie);
 	    }
 	    
-	    List<BoardVo> vo = boardService.findBoardByNo(boardNo);
+	    BoardVo vo = boardService.getContents(boardNo);
 	    
-	    System.out.println(vo.size());
-	    model.addAttribute("vo", vo.get(0));
+	    model.addAttribute("vo", vo);
 	    model.addAttribute("page", page);
 	    
 	    return "board/view";
@@ -119,7 +102,7 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String deleteBoard(@RequestParam("no")Long no,HttpSession session) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
-		boardService.deleteByNo(no,vo.getNo());
+		boardService.deleteContents(no, vo.getNo());
 		return "redirect:/board";
 	}
 	
@@ -129,16 +112,18 @@ public class BoardController {
 	}
 	
 	@GetMapping("/update")
-	public String updateForm(@RequestParam Long no, Model model) {
-		List<BoardVo> list = boardService.findBoardByNo(no);
-		model.addAttribute("vo",list.get(0));
+	public String updateForm(@RequestParam Long no, Model model, HttpSession session) {
+		UserVo userVo = (UserVo) session.getAttribute("authUser");
+		BoardVo vo = boardService.getContents(no,userVo.getNo());
+		model.addAttribute("vo",vo);
 		return "board/modify";
 		
 	}
 	
 	@PostMapping("/update")
-	public String update(@ModelAttribute BoardVo vo) {
-		boardService.update(vo);
+	public String update(@ModelAttribute BoardVo vo,HttpSession session) {
+		UserVo userVo = (UserVo) session.getAttribute("authUser");
+		boardService.updateContents(vo,userVo.getNo());
 		return "redirect:/board";
 	}
 	

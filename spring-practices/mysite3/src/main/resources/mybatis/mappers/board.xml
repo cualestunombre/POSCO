@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">	
+	 <!-- deleteByNo -->
+    <delete id="deleteByNo" parameterType="map">
+        delete from board where no = #{no} and user_no = #{userNo}
+    </delete>
+
+    <!-- getNextGNo -->
+    <select id="getNextGNo" resultType="long">
+        select ifnull(max(g_no) + 1, 1) from board
+    </select>
+
+	<select id="getTotalBoardNo" resultType="int" parameterType="map">
+	    select count(*) 
+	    from board 
+	    <where>
+	        <if test="key != null and key != ''">
+	            title like #{key}
+	        </if>
+	    </where>
+	</select>
+
+ 
+
+    <select id="findBoardsByPage" resultType="boardvo" parameterType="map">
+	    select b.no, b.title, b.contents, b.hit, date_format(b.reg_date, '%Y/%m/%d %H:%i:%s') as regDate,
+	           b.g_no as gno, b.o_no as ono, b.depth, b.user_no as userNo, u.name
+	    from board b inner join user u on b.user_no = u.no
+	    <where>
+	        <if test="key != null and key != ''">
+	            b.title like #{key}
+	        </if>
+	    </where>
+	    order by g_no desc, o_no asc
+	    limit #{page}, 5
+	</select>
+
+    <select id="findBoardByNo" resultType="boardvo" parameterType="map">
+	    select b.no, b.title, b.contents, b.hit, date_format(b.reg_date, '%Y/%m/%d %H:%i:%s') as regDate,
+	           b.g_no as gno, b.o_no as ono, b.depth, b.user_no as userNo, u.name
+	    from board b inner join user u on b.user_no = u.no
+	    where b.no = #{boardNo}
+	    <if test="userNo != null">
+	        and b.user_no = #{userNo}
+	    </if>
+	</select>
+
+    <!-- insert -->
+    <insert id="insert" parameterType="boardvo">
+        insert into board (title, contents, hit, reg_date, g_no, o_no, depth, user_no)
+        values (#{title}, #{contents}, #{hit}, now(), #{gno}, #{ono}, #{depth}, #{userNo})
+        <selectKey keyProperty="no" resultType="long" >
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <!-- update -->
+    <update id="update" parameterType="map">
+        update board
+        set title = #{title}, contents = #{contents}
+        where no = #{boardNo} and user_no = #{userNo}
+    </update>
+
+    <!-- updateForInsertReply -->
+    <update id="updateForInsertReply" parameterType="map">
+        update board
+        set o_no = o_no + 1
+        where g_no = #{targetGno} and o_no >= #{targetOno}
+    </update>
+
+    <!-- increaseHit -->
+    <update id="increaseHit" parameterType="long">
+        update board
+        set hit = hit + 1
+        where no = #{boardNo}
+    </update>
+
+    
+	
+</mapper>
+
