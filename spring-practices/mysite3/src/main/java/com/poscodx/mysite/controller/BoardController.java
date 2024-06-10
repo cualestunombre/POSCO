@@ -58,6 +58,9 @@ public class BoardController {
 	@PostMapping(value= {"","/"})
 	public String write(@ModelAttribute BoardVo vo, @RequestParam(required=false) Long parentNo,HttpSession session) {
 		UserVo userVo  = (UserVo) session.getAttribute("authUser");
+		if (userVo == null) {
+			return "redirect:/";
+		}
 		vo.setUserNo(userVo.getNo());
 		if (parentNo == null) {
 			boardService.addContents(vo);
@@ -65,7 +68,6 @@ public class BoardController {
 
 			boardService.addContents(vo,parentNo);
 		}
-		
 		
 		return "redirect:/board";
 	}
@@ -102,18 +104,28 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String deleteBoard(@RequestParam("no")Long no,HttpSession session) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
+		if (vo == null) {
+			return "redirect:/";
+		}
 		boardService.deleteContents(no, vo.getNo());
 		return "redirect:/board";
 	}
 	
 	@GetMapping("/write")
-	public String writeForm() {
+	public String writeForm(HttpSession session) {
+		UserVo userVo = (UserVo) session.getAttribute("authUser");
+		if (userVo == null) {
+			return "redirect:/";
+		}
 		return "board/write";
 	}
 	
 	@GetMapping("/update")
 	public String updateForm(@RequestParam Long no, Model model, HttpSession session) {
 		UserVo userVo = (UserVo) session.getAttribute("authUser");
+		if (userVo == null) {
+			return "redirect:/";
+		}
 		BoardVo vo = boardService.getContents(no,userVo.getNo());
 		model.addAttribute("vo",vo);
 		return "board/modify";
@@ -123,13 +135,20 @@ public class BoardController {
 	@PostMapping("/update")
 	public String update(@ModelAttribute BoardVo vo,HttpSession session) {
 		UserVo userVo = (UserVo) session.getAttribute("authUser");
+		if (userVo == null) {
+			return "redirect:/";
+		}
 		boardService.updateContents(vo,userVo.getNo());
 		return "redirect:/board";
 	}
 	
 	
 	@GetMapping("/reply")
-	public String replyForm(@RequestParam Long no,Model model) {
+	public String replyForm(@RequestParam Long no,Model model,HttpSession session) {
+		UserVo userVo = (UserVo) session.getAttribute("authUser");
+		if (userVo == null) {
+			return "redirect:/";
+		}
 		model.addAttribute("parentNo",no);
 		return "board/write";
 		

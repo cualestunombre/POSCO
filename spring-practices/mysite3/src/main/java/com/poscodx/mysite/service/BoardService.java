@@ -3,15 +3,15 @@ package com.poscodx.mysite.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import com.poscodx.mysite.controller.BoardController.Page;
 import com.poscodx.mysite.repository.BoardRepository;
 import com.poscodx.mysite.vo.BoardVo;
 
 @Service
+@Transactional
 public class BoardService {
 	private BoardRepository boardRepository;
 	
