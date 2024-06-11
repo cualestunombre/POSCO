@@ -13,6 +13,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StopWatch;
 
 import com.poscodx.mysite.vo.BoardVo;
 import com.poscodx.mysite.vo.GuestbookVo;
@@ -74,6 +75,8 @@ public class BoardRepository {
 	
 	public BoardVo findBoardByNo(Long boardNo, Long userNo){
 
+		
+
 		Map<String,Object> map = new HashMap<>();
 		
 		map.put("boardNo",boardNo);
@@ -81,6 +84,9 @@ public class BoardRepository {
 		BoardVo result = 
 				sqlSession.selectOne("board.findBoardByNo",map);
 		
+
+
+
 		return result;
 	}
 	

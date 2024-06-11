@@ -41,7 +41,7 @@ public class BoardService {
 			return p;
 		}).toList();
 		
-		map.put("list", boardRepository.findBoardsByPage(page,null));
+		map.put("list", boardRepository.findBoardsByPage(5*(page-1),null));
 		map.put("pages", pages);
 		map.put("page", page);
 		map.put("maxPage", totalPage);
@@ -66,7 +66,7 @@ public class BoardService {
 			return p;
 		}).toList();
 		
-		map.put("list", boardRepository.findBoardsByPage(page,keyword));
+		map.put("list", boardRepository.findBoardsByPage(5*(page-1),keyword));
 		map.put("pages", pages);
 		map.put("page", page);
 		map.put("maxPage", totalPage);

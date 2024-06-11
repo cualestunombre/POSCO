@@ -19,7 +19,7 @@
             	</c:if>
             	
             	<c:if test='${key != null and key != "" }'>
-            		<a href="/mysite2/board">검색종료</a>
+            		<a href="/mysite3/board">검색종료</a>
             	</c:if>
             	<a href="/"></a>
                 <form id="search_form" action="${pageContext.servletContext.contextPath}/board" method="get">

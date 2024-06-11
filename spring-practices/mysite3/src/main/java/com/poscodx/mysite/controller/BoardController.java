@@ -1,8 +1,6 @@
 package com.poscodx.mysite.controller;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poscodx.mysite.repository.BoardRepository;
+import com.poscodx.mysite.interceptor.Auth;
+import com.poscodx.mysite.interceptor.AuthUser;
 import com.poscodx.mysite.service.BoardService;
 import com.poscodx.mysite.vo.BoardVo;
 import com.poscodx.mysite.vo.UserVo;
@@ -55,13 +53,14 @@ public class BoardController {
 	}
 	
 
+	@Auth
 	@PostMapping(value= {"","/"})
-	public String write(@ModelAttribute BoardVo vo, @RequestParam(required=false) Long parentNo,HttpSession session) {
-		UserVo userVo  = (UserVo) session.getAttribute("authUser");
-		if (userVo == null) {
+	public String write(@ModelAttribute BoardVo vo, @RequestParam(required=false) Long parentNo,@AuthUser UserVo authUser) {
+	
+		if (authUser == null) {
 			return "redirect:/";
 		}
-		vo.setUserNo(userVo.getNo());
+		vo.setUserNo(authUser.getNo());
 		if (parentNo == null) {
 			boardService.addContents(vo);
 		}else {
@@ -102,51 +101,46 @@ public class BoardController {
 	}
 	
 	@GetMapping("/delete")
-	public String deleteBoard(@RequestParam("no")Long no,HttpSession session) {
-		UserVo vo = (UserVo) session.getAttribute("authUser");
-		if (vo == null) {
+	public String deleteBoard(@RequestParam("no")Long no,@AuthUser UserVo authUser) {
+		if (authUser == null) {
 			return "redirect:/";
 		}
-		boardService.deleteContents(no, vo.getNo());
+		boardService.deleteContents(no, authUser.getNo());
 		return "redirect:/board";
 	}
 	
 	@GetMapping("/write")
-	public String writeForm(HttpSession session) {
-		UserVo userVo = (UserVo) session.getAttribute("authUser");
-		if (userVo == null) {
+	public String writeForm(@AuthUser UserVo authUser) {
+		if (authUser == null) {
 			return "redirect:/";
 		}
 		return "board/write";
 	}
 	
 	@GetMapping("/update")
-	public String updateForm(@RequestParam Long no, Model model, HttpSession session) {
-		UserVo userVo = (UserVo) session.getAttribute("authUser");
-		if (userVo == null) {
+	public String updateForm(@RequestParam Long no, Model model, @AuthUser UserVo authUser) {
+		if (authUser == null) {
 			return "redirect:/";
 		}
-		BoardVo vo = boardService.getContents(no,userVo.getNo());
+		BoardVo vo = boardService.getContents(no,authUser.getNo());
 		model.addAttribute("vo",vo);
 		return "board/modify";
 		
 	}
 	
 	@PostMapping("/update")
-	public String update(@ModelAttribute BoardVo vo,HttpSession session) {
-		UserVo userVo = (UserVo) session.getAttribute("authUser");
-		if (userVo == null) {
+	public String update(@ModelAttribute BoardVo vo,@AuthUser UserVo authUser) {
+		if (authUser == null) {
 			return "redirect:/";
 		}
-		boardService.updateContents(vo,userVo.getNo());
+		boardService.updateContents(vo,authUser.getNo());
 		return "redirect:/board";
 	}
 	
 	
 	@GetMapping("/reply")
-	public String replyForm(@RequestParam Long no,Model model,HttpSession session) {
-		UserVo userVo = (UserVo) session.getAttribute("authUser");
-		if (userVo == null) {
+	public String replyForm(@RequestParam Long no,Model model,@AuthUser UserVo authUser) {
+		if (authUser == null) {
 			return "redirect:/";
 		}
 		model.addAttribute("parentNo",no);

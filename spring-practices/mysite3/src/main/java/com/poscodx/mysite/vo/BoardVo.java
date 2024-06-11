@@ -60,9 +60,12 @@ public class BoardVo {
 		this.name = name;
 	}
 	
+
 	public String getName() {
 		return name;
 	}
+
+
 	private Long no;
 	private String title;
 	private String contents;
@@ -73,5 +76,6 @@ public class BoardVo {
 	private int depth;
 	private Long userNo;
 	private String name;
+
 
 }

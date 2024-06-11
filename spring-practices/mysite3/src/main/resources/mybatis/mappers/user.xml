@@ -16,7 +16,7 @@
 		<![CDATA[
 			insert
 			into user
-			values (null, #{name}, #{email} , password(#{password}), #{gender}, now())
+			values (null, #{name}, #{email} , password(#{password}), #{gender}, now(), DEFAULT)
 		]]>
 		<selectKey keyProperty="no" resultType="long">
 			<![CDATA[

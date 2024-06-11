@@ -14,6 +14,13 @@
 	
 	<!--  이게 있어야 annotation을 인식할 수 있다 -->
 	<context:annotation-config />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**" />
+			<bean class="com.poscodx.hellospring.interceptor.MyInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 
 	
 	<context:component-scan base-package="com.poscodx.hellospring.controller" />

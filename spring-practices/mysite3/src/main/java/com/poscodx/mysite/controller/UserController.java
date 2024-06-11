@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.poscodx.mysite.interceptor.Auth;
+import com.poscodx.mysite.interceptor.AuthUser;
 import com.poscodx.mysite.service.UserService;
 import com.poscodx.mysite.vo.UserVo;
 
@@ -49,33 +51,14 @@ public class UserController {
 		return "/user/loginform";
 	}
 	
-	@PostMapping("/login")
-	public String login(HttpServletRequest request, UserVo vo,Model model) {
-		UserVo authUser = userService.getUser(vo.getEmail(),vo.getPassword());
-		if (authUser == null) {
-			model.addAttribute("email",vo.getEmail());
-			model.addAttribute("result","fail");
-			return "/user/loginform";
-		}
-		HttpSession session = request.getSession(true);
-		session.setAttribute("authUser", authUser);
-		return "redirect:/main";
-		
-	}
 	
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("authUser");
-		session.invalidate();
-		return "redirect:/main";
-	}
+
 	
+	@Auth
 	@GetMapping("/update")
-	public String update(HttpSession session, Model model ) {
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (authUser == null ) {
-			return "redirect:/main";
-		}
+	public String update(HttpSession session,@AuthUser UserVo authUser, Model model ) {
+
+	
 		
 		UserVo vo = userService.getUser(authUser.getNo());
 		model.addAttribute("userVo",vo);
@@ -85,12 +68,11 @@ public class UserController {
 		
 	}
 	
+	@Auth
 	@PostMapping("/update")
-	public String update(HttpSession session,UserVo vo) {
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (authUser == null ) {
-			return "redirect:/main";
-		}
+	public String update(@AuthUser UserVo authUser, UserVo vo) {
+	
+
 		
 		
 		vo.setNo(authUser.getNo());
