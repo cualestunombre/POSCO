@@ -162,7 +162,7 @@
 
       
       <Context docBase="${catalina.home}/webapps/manager" path="" reloadable="true"/>
-      <Context docBase="mysite3" path="/mysite3" reloadable="true" source="org.eclipse.jst.jee.server:mysite3"/><Context docBase="fileupload" path="/fileupload" reloadable="true" source="org.eclipse.jst.jee.server:fileupload"/></Host>
+      <Context docBase="mysite3" path="/mysite3" reloadable="true" source="org.eclipse.jst.jee.server:mysite3"/><Context docBase="fileupload" path="/fileupload" reloadable="true" source="org.eclipse.jst.jee.server:fileupload"/><Context docBase="jblog3" path="/jblog3" reloadable="true" source="org.eclipse.jst.jee.server:jblog3"/></Host>
     </Engine>
   </Service>
 </Server>

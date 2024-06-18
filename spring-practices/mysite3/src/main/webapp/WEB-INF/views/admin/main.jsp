@@ -19,6 +19,7 @@
 						<label class="block-label" for="title">사이트 타이틀</label>
 						<input id="title" name="title" type="text" value="${site.title }">
 						
+						<input type="hidden" value="${site.profile}" name="profile">
 						<label class="block-label" for="welcome">환영 메세지</label>
 						<input id="welcomeMessage" name="welcome" type="text" value="${site.welcome }">
 

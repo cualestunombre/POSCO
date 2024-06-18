@@ -1,12 +1,18 @@
 package com.poscodx.mysite.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,14 +36,19 @@ public class UserController {
 
 	
 	@GetMapping("/join")
-	public String join() {
+	public String join(@ModelAttribute UserVo userVo) {
 		return "/user/joinform";
 	}
 	
 	@PostMapping("/join")
-	public String join(UserVo vo) {
-		userService.join(vo);
-		
+	public String join(@Valid @ModelAttribute UserVo userVo, BindingResult result,Model model) {
+		if(result.hasErrors()) {
+			
+			Map map = result.getModel();
+			model.addAllAttributes(map);
+			return "user/joinform";
+		}
+		userService.join(userVo);
 		return "redirect:/user/joinsuccess";
 	}
 	
@@ -52,7 +63,6 @@ public class UserController {
 	}
 	
 	
-
 	
 	@Auth
 	@GetMapping("/update")

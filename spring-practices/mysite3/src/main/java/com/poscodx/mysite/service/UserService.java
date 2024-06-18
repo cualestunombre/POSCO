@@ -21,8 +21,16 @@ public class UserService {
 	}
 
 
-	public UserVo getUser(String email, String password) {
-		return userRepository.findByNoAndPassword(email, password);
+	public UserVo getUser(Long no, String password) {
+		return userRepository.findByNoAndPassword(no, password);
+	}
+	
+	public UserVo getUser(String email) {
+		return userRepository.findByEmail(email);
+	}
+	
+	public UserVo getUser(String email,String password) {
+		return userRepository.findByEmailAndPassword(email, password);
 	}
 
 

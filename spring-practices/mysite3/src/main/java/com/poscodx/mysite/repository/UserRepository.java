@@ -34,8 +34,18 @@ public class UserRepository {
 		return result;
 	}
 
-	public UserVo findByNoAndPassword(String email, String password) {
-		UserVo result = sqlSession.selectOne("user.findByNoAndPassword",Map.of("email",email,"password",password));
+	public UserVo findByNoAndPassword(Long no, String password) {
+		UserVo result = sqlSession.selectOne("user.findByNoAndPassword",Map.of("no",no,"password",password));
+		return result;
+	}
+	
+	public UserVo findByEmail(String email) {
+		UserVo result = sqlSession.selectOne("user.findByEmail",Map.of("email",email));
+		return result;
+	}
+	
+	public UserVo findByEmailAndPassword(String email,String password) {
+		UserVo result = sqlSession.selectOne("user.findByEmailAndPassword",Map.of("email",email,"password",password));
 		return result;
 	}
 

@@ -1,19 +1,19 @@
 package com.poscodx.mysite.controller;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.poscodx.mysite.interceptor.Auth;
 import com.poscodx.mysite.service.SiteService;
+import com.poscodx.mysite.service.UploadService;
 import com.poscodx.mysite.vo.SiteVo;
 
 @Controller
@@ -22,10 +22,7 @@ import com.poscodx.mysite.vo.SiteVo;
 public class AdminController {
 	
 	@Autowired
-	private ApplicationContext applicationContext;
-	
-	@Autowired
-	private ServletContext servletContext;
+	private UploadService uploadService;
 	
 	@Autowired
 	private SiteService siteService;
@@ -37,12 +34,25 @@ public class AdminController {
 	}
 	
 	@PostMapping("/main/update")
-	public String updateMain(@RequestParam String welcome,@RequestParam String title, @RequestParam String des) {
+	public String updateMain(@RequestParam( "file1" ) MultipartFile file1, @RequestParam String description,
+			@RequestParam String welcome, @RequestParam String title,@RequestParam String profile,HttpServletRequest request) {
+		
+		String url = uploadService.restore(file1);
 		SiteVo vo = new SiteVo();
-		vo.setDescription(des);
+		
+		vo.setDescription(description);
 		vo.setTitle(title);
+		vo.setProfile(url);
 		vo.setWelcome(welcome);
 		siteService.updateSite(vo);
+		
+		if (url == null) {
+			vo.setProfile(profile);
+		}
+		
+		ServletContext context = request.getServletContext();
+		context.setAttribute("site", vo);
+		
 		return "redirect:/admin";
 		
 	}
@@ -61,5 +71,4 @@ public class AdminController {
 	public String guestbook() {
 		return "admin/guestbook";
 	}
-
 }

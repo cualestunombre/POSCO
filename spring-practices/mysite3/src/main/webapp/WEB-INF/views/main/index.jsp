@@ -15,7 +15,7 @@
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<img id="profile" src="${pageContext.request.contextPath}/assets/images/star.jpeg" style='width: 250px'>
+					<img id="profile" src="${pageContext.request.contextPath}${site.profile}" style='width: 250px'>
 					<h2>${site.welcome}</h2>
 					<p>
 						${site.description}<br><br>

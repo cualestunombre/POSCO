@@ -25,5 +25,7 @@
   	<module>exception</module>
   	<module>aoptest</module>
   	<module>fileupload</module>
+  	<module>logex</module>
+  	<module>container</module>
   </modules>
 </project>

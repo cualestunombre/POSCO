@@ -4,7 +4,17 @@
 <mapper namespace="user">	
 	<select id="findByNoAndPassword" resultType="uservo" parameterType="map">
 		<![CDATA[
+			select * from user where no = #{no} and password=password(#{password})
+		]]>
+	</select>
+	<select id="findByEmailAndPassword" resultType="uservo" parameterType="map">
+		<![CDATA[
 			select * from user where email = #{email} and password=password(#{password})
+		]]>
+	</select>
+	<select id="findByEmail" resultType="uservo" parameterType="map">
+		<![CDATA[
+			select * from user where email = #{email} 
 		]]>
 	</select>
 	<select id="findByNo" resultType="uservo" parameterType="long">
