@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .one span {
+        vertical-align: baseline;
+      }
+
+      .two span {
+        vertical-align: sub;
+      }
+
+      .three span {
+        vertical-align: super;
+      }
+
+      .four span {
+        vertical-align: top;
+      }
+
+      .five span {
+        vertical-align: text-top;
+      }
+
+      .six span {
+        vertical-align: middle;
+      }
+
+      .seven span {
+        vertical-align: bottom;
+      }
+
+      .eight span {
+        vertical-align: text-bottom;
+      }
+      #img {
+        width: 10px;
+        height: 10px;
+        vertical-align: sub;
+      }
+
+      .type {
+        vertical-align: sub;
+      }
+      .type2 {
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p class="one">Hello world<span>👈</span></p>
+      <p class="two">Hello world<span>👈</span></p>
+      <p class="three">Hello world<span>👈</span></p>
+      <p class="four">Hello world<span>👈</span></p>
+      <p class="five">Hello world<span>👈</span></p>
+      <p class="six">Hello world<span>👈</span></p>
+      <p class="seven">Hello world<span>👈</span></p>
+      <p class="eight">Hello world<span>👈</span></p>
+    </div>
+    <p class="container">
+      <span class="type">안녕</span><img id="img" src="img.png" /><span
+        class="type2"
+        >하세요</span
+      ><span class="type">반가워요</span>
+    </p>
+  </body>
+</html>

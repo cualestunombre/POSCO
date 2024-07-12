@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Float Example</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+        background-color: lightblue;
+      }
+      .left {
+        float: left;
+      }
+      .right {
+        float: right;
+      }
+      .container {
+        overflow: auto; /* 부모 요소가 자식 요소를 감싸도록 하기 위해 사용 */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"> 
+      <div class="box left">왼쪽 플로트1</div>
+      <div class="box right">오른쪽 플로트3</div>
+      <div class="box left">왼쪽 플로트2</div>
+      <div class="box right">오른쪽 플로트4</div>
+    </div>
+  </body>
+</html>

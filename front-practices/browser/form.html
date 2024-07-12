@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Form Submission with Axios</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <form id="myForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+      <br />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("myForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // 폼의 기본 제출 동작 방지
+
+          const formData = new FormData(this); // 여기서 'this'는 폼 요소를 가리킴
+          const url =
+            "https://webhook.site/f5d90b3e-01d2-4302-8a31-68e2e877388d"; // 서버의 엔드포인트 URL
+
+          axios
+            .post(url, formData)
+            .then((response) => {
+              alert("Form submitted successfully!");
+              console.log(response.data); // 서버 응답 처리
+            })
+            .catch((error) => {
+              alert("Form submission failed!");
+              console.error("Error:", error);
+            });
+        });
+    </script>
+  </body>
+</html>

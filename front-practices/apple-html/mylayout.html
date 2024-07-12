@@ -1,0 +1,109 @@
+<!-- float를 이용한 레이아웃 구성-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .intro {
+        width: 70%;
+        height: 100px;
+        box-shadow: rgba(0, 0, 0, 0.2) 5px 4px 12px;
+        float: left;
+      }
+      .contents {
+        width: 70%;
+        height: 200px;
+        background-color: coral;
+        float: left;
+      }
+      .image {
+        width: 30%;
+        height: 200px;
+        float: right;
+      }
+      .ad {
+        width: 30%;
+        height: 100px;
+        float: right;
+        background-color: crimson;
+      }
+      .profile {
+        display: inline-block;
+        margin-left: 15px;
+        margin-top: 15px;
+        height: 70px;
+        width: 70px;
+        border-radius: 100%;
+      }
+      .profile-info {
+        margin-top: 10px;
+        margin-left: 10px;
+        height: 80px;
+        vertical-align: top;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+      .title {
+        font-weight: 500;
+      }
+      .time {
+        font-weight: 200;
+      }
+      .goods {
+        display: block;
+        height: 200px;
+        width: 100%;
+      }
+      .contents {
+        background-color: rgb(0, 255, 0, 0.2);
+      }
+      nav li {
+        width: 50px;
+        display: inline-block;
+        box-shadow: rgba(0, 0, 0, 0.2) 5px 4px 12px;
+        text-align: center;
+        border-radius: 5px;
+    
+      }
+     
+      a{
+        text-decoration: none;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <ul>
+          <li><a href="#"">영화</a></li>
+          <li><a href="#"">맛집</a></li>
+          <li><a href="#"">IT</a></li>
+          <li><a href="#">컴퓨터</a></li>
+        </ul>
+      </nav>
+      <div class="intro">
+        <div class="info-box">
+          <img class="profile" src="80910004.JPG" />
+          <div class="profile-info">
+            <span class="title">우석우</span>
+            <span class="time">1시간전</span>
+          </div>
+        </div>
+      </div>
+      <div class="image">
+        <img class="goods" src="sponge.webp" />
+      </div>
+      <div class="contents">
+        <h3 class="title">스폰지밥 팔아요</h3>
+        <p class="para">스폰지밥 팝니다ㅋㅋㅋㅋ</p>
+      </div>
+      <div class="ad">광고를 위한 공간입니다!!</div>
+    </div>
+  </body>
+</html>

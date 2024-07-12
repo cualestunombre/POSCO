@@ -1,7 +1,10 @@
 package com.poscodx.mysite.initializer;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
@@ -49,6 +52,8 @@ public class MySiteWebApplicationInitializer extends AbstractAnnotationConfigDis
     	
     	
     }
+    
+
     
 	
 

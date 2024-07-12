@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import com.poscodx.jblog.interceptor.Auth;
 import com.poscodx.jblog.interceptor.AuthUser;
@@ -42,7 +43,7 @@ public class BlogController {
 			Model model,@AuthUser UserVo userVo) {
 		
 		Map<String,Object> result = blogService.renderMain(id,categoryNo,postNo);
-		
+
 		
 		model.addAllAttributes(result);
 		model.addAttribute("authUser",userVo);

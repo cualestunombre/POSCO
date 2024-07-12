@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="location = location;">refresh1</button>
+    <button onclick="location.href = location.href;">refresh2</button>
+    <button onclick="location.assign('');">refresh3</button>
+    <button onclick="location.replace(location);">refresh4</button>
+    <button onclick="location.reload();">refresh5</button>
+    <button onclick="location.href='https://www.poscodx.com';">포스코dx</button>
+    <script>
+      // userAgent정보 불러온다
+      console.log(navigator.userAgent);
+      // os정보도 나온다
+      console.log(navigator.platform);
+      n = 10;
+      window.console.log(window.n);
+
+      setTimeout(() => {
+        let child = window.open(
+          "/Users/woo/Desktop/code/front-practices/browser/hello.html",
+          "popup",
+          "width=300",
+          "height=300"
+        );
+        setTimeout(() => {
+          child.document.write("<h1>contents changed</h1>");
+        }, 1000);
+      }, 1000);
+      setTimeout(() => {
+        document.querySelector("body").style.backgroundColor = "lightgreen";
+        const div = document.createElement("div");
+        div.setAttribute("class", "hi");
+        div.innerText = "반갑습니다";
+        document.body.append(div);
+        document.body.appendChild(div);
+        div.onclick = (e) => {
+          console.log("hey");
+        };
+      }, 2000);
+      const a = 5;
+    </script>
+
+    <script>
+      console.log(a);
+    </script>
+  </body>
+</html>

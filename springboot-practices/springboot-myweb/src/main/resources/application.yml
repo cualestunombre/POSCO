@@ -1,0 +1,21 @@
+# spring configuration
+spring:
+  application:
+    name: myweb
+  thymeleaf:
+    prefix: classpath:template/
+    suffix: .html
+    view-names: th/*
+    mode: HTML
+    cache: false
+
+
+server:
+  port: 8070
+  servlet:
+    context-path: /
+    encoding:
+      enabled: true
+      charset: utf-8
+
+

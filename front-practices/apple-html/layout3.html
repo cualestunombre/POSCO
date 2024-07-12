@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .main-background {
+        position: relative;
+        padding-top: 1px;
+        width: 100%;
+        height: 1100px;
+        background-image: url("seoul.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: left;
+        background-attachment: fixed;
+      }
+      .main-title {
+        font-size: 50px;
+        margin-top: 200px;
+        color: white;
+        text-align: center;
+      }
+      .intro {
+        font-size: 30px;
+        color: white;
+        text-align: center;
+      }
+      body {
+        margin: 0px;
+        font-family: Arial, sans-serif;
+      }
+      .buttons {
+        text-align: center;
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      button {
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        border-radius: 100%;
+        background-color: rgba(255, 255, 255, 0.1);
+        font-size: 15px;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      /*
+        position absolute인 요소를 가운데 정렬하는 방법
+      */
+      footer {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+      }
+      footer .footer-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 20px;
+      }
+      footer .footer-container div {
+        margin: 10px;
+      }
+      footer h3 {
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+      footer p,
+      footer a {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #ccc;
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-background">
+      <h4 class="main-title">Come to Korea!</h4>
+      <p class="intro">한국으로 오세요!!</p>
+      <div class="buttons">
+        <button>예약하기</button>
+        <button>예약현황</button>
+        <button>주요관광지</button>
+      </div>
+      <div>안녕ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</div>
+      <footer>
+        <div class="footer-container">
+          <div>
+            <h3>회사 정보</h3>
+            <p>가상의 여행사</p>
+            <p>서울특별시 강남구</p>
+            <p>전화: 02-1234-5678</p>
+            <p>이메일: info@faketravel.com</p>
+          </div>
+          <div>
+            <h3>약관 및 정책</h3>
+            <a href="#">이용 약관</a>
+            <a href="#">개인 정보 보호 정책</a>
+            <a href="#">환불 정책</a>
+          </div>
+          <div>
+            <h3>고객 지원</h3>
+            <a href="#">자주 묻는 질문</a>
+            <a href="#">고객 지원 센터</a>
+            <a href="#">문의하기</a>
+          </div>
+        </div>
+        <p>&copy; 2024 가상의 여행사. 모든 권리 보유.</p>
+      </footer>
+    </div>
+  </body>
+</html>

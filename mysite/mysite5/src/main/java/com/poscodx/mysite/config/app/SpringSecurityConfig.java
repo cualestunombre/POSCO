@@ -69,7 +69,11 @@ public class SpringSecurityConfig{
 			.loginProcessingUrl("/user/auth")
 			.usernameParameter("email")
 			.passwordParameter("password")
-			.failureUrl("/user/login?result=failure")
+			.failureHandler((req,res,ex)->{
+				req.setAttribute("email", req.getParameter("email"));
+				req.getRequestDispatcher("/user/login")
+				.forward(req, res);
+			})
 			.and()
 			.authorizeHttpRequests((auth)->{
 				/*

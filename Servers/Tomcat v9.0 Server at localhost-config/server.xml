@@ -162,7 +162,7 @@
 
       
       <Context docBase="${catalina.home}/webapps/manager" path="" reloadable="true"/>
-      <Context docBase="mysite3" path="/mysite3" reloadable="true" source="org.eclipse.jst.jee.server:mysite3"/><Context docBase="fileupload" path="/fileupload" reloadable="true" source="org.eclipse.jst.jee.server:fileupload"/><Context docBase="jblog3" path="/jblog3" reloadable="true" source="org.eclipse.jst.jee.server:jblog3"/><Context docBase="mysite2" path="/mysite2" reloadable="true" source="org.eclipse.jst.jee.server:mysite2"/><Context docBase="mysite5" path="/mysite5" reloadable="true" source="org.eclipse.jst.jee.server:mysite5"/><Context docBase="ss-ex01" path="/ss-ex01" reloadable="true" source="org.eclipse.jst.jee.server:ss-ex01"/></Host>
+      <Context docBase="mysite3" path="/mysite3" reloadable="true" source="org.eclipse.jst.jee.server:mysite3"/><Context docBase="fileupload" path="/fileupload" reloadable="true" source="org.eclipse.jst.jee.server:fileupload"/><Context docBase="jblog3" path="/jblog3" reloadable="true" source="org.eclipse.jst.jee.server:jblog3"/><Context docBase="mysite2" path="/mysite2" reloadable="true" source="org.eclipse.jst.jee.server:mysite2"/><Context docBase="mysite5" path="/mysite5" reloadable="true" source="org.eclipse.jst.jee.server:mysite5"/><Context docBase="ss-ex01" path="/ss-ex01" reloadable="true" source="org.eclipse.jst.jee.server:ss-ex01"/><Context docBase="springboot-myweb" path="/springboot-myweb" reloadable="true" source="org.eclipse.jst.jee.server:springboot-myweb"/><Context docBase="ch02" path="/ch02" reloadable="true" source="org.eclipse.jst.jee.server:ch02"/><Context docBase="ch03" path="/ch03" reloadable="true" source="org.eclipse.jst.jee.server:ch03"/></Host>
     </Engine>
   </Service>
 </Server>

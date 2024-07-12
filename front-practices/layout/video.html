@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Video Player</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #333;
+        color: #fff;
+        font-family: Arial, sans-serif;
+      }
+
+      .video-container {
+        position: relative;
+        width: 80%;
+        max-width: 800px;
+      }
+
+      .video-player {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 2px solid #fff;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .btn {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        color: #00f;
+      }
+
+      .progress-bar {
+        width: 50%;
+        cursor: pointer;
+      }
+
+      .volume-bar {
+        width: 10%;
+        cursor: pointer;
+      }
+
+      .time {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-container">
+      <video id="video" class="video-player" controls>
+        <source src="/Users/woo/Documents/video.mov" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="controls">
+        <button id="play-pause" class="btn">Play</button>
+        <input
+          type="range"
+          id="progress"
+          class="progress-bar"
+          min="0"
+          max="100"
+          value="0"
+        />
+        <span id="current-time" class="time">0:00</span> /
+        <span id="duration" class="time">0:00</span>
+        <button id="mute-unmute" class="btn">Mute</button>
+        <input
+          type="range"
+          id="volume"
+          class="volume-bar"
+          min="0"
+          max="1"
+          step="0.1"
+          value="1"
+        />
+        <button id="fullscreen" class="btn">Fullscreen</button>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const video = document.getElementById("video");
+        const playPauseBtn = document.getElementById("play-pause");
+        const progress = document.getElementById("progress");
+        const currentTimeDisplay = document.getElementById("current-time");
+        const durationDisplay = document.getElementById("duration");
+        const muteUnmuteBtn = document.getElementById("mute-unmute");
+        const volume = document.getElementById("volume");
+        const fullscreenBtn = document.getElementById("fullscreen");
+
+        video.controls = false;
+
+        playPauseBtn.addEventListener("click", () => {
+          if (video.paused) {
+            video.play();
+            playPauseBtn.textContent = "Pause";
+          } else {
+            video.pause();
+            playPauseBtn.textContent = "Play";
+          }
+        });
+
+        video.addEventListener("timeupdate", () => {
+          const progressValue = (video.currentTime / video.duration) * 100;
+          progress.value = progressValue;
+          currentTimeDisplay.textContent = formatTime(video.currentTime);
+          durationDisplay.textContent = formatTime(video.duration);
+        });
+
+        progress.addEventListener("input", () => {
+          const seekTime = (progress.value / 100) * video.duration;
+          video.currentTime = seekTime;
+        });
+
+        muteUnmuteBtn.addEventListener("click", () => {
+          video.muted = !video.muted;
+          muteUnmuteBtn.textContent = video.muted ? "Unmute" : "Mute";
+        });
+
+        volume.addEventListener("input", () => {
+          video.volume = volume.value;
+        });
+
+        fullscreenBtn.addEventListener("click", () => {
+          if (video.requestFullscreen) {
+            video.requestFullscreen();
+          } else if (video.mozRequestFullScreen) {
+            // Firefox
+            video.mozRequestFullScreen();
+          } else if (video.webkitRequestFullscreen) {
+            // Chrome, Safari and Opera
+            video.webkitRequestFullscreen();
+          } else if (video.msRequestFullscreen) {
+            // IE/Edge
+            video.msRequestFullscreen();
+          }
+        });
+
+        function formatTime(seconds) {
+          const minutes = Math.floor(seconds / 60);
+          seconds = Math.floor(seconds % 60);
+          const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+          const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+          return `${formattedMinutes}:${formattedSeconds}`;
+        }
+      });
+    </script>
+  </body>
+</html>

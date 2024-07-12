@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+// 글로벌 스타일 정의
+:global {
+    #root, #App {
+        width: 100%;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizelegibility;
+    letter-spacing: -0.25px;
+}
+
+body {
+    font-family: 'Space Mono', monospace; 
+    display: flex;
+    flex-direction: column;
+    max-width: 420px;
+    padding: 32px;
+    margin: 60px auto;
+    border: 1px solid #eee;
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* --- */
+
+.title {
+    margin-bottom: 50px;
+}
+
+.grocery_list {
+    padding-left: 50px;
+    
+    li { 
+        color: #4F4F4F; 
+        padding-left: 16px;
+        margin-top: 24px;
+        position: relative;
+        font-size: 16px;
+        line-height: 20px;
+        
+        &:before {
+            content: '';
+            display: block;
+            height: 42px;
+            width: 42px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            position: absolute;
+            top: -12px;
+            left: -46px;
+        }
+
+        &:nth-child(odd):before {
+            border-color: #0BAD02;
+        }
+
+        &:nth-child(even):before {
+            border-color: #2378D5;
+        }
+
+        strong {
+            display: block;
+            position: relative;
+            top: -10px;
+            color: #292929;
+        }
+
+        span {
+            display: block;
+            position: relative;
+            top: -7px;
+        }
+    }
+}

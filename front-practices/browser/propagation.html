@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Propagation Example</title>
+    <style>
+      .parent {
+        padding: 20px;
+        background-color: lightblue;
+      }
+      .child {
+        padding: 20px;
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent" id="parent">
+      Parent
+      <div class="child" id="child">Child</div>
+    </div>
+
+    <script>
+      document
+        .getElementById("parent")
+        .addEventListener("click", function (event) {
+          alert("Parent clicked!");
+          console.log("Parent clicked!");
+        });
+
+      document
+        .getElementById("child")
+        .addEventListener("click", function (event) {
+          // 자식에게 먼저 발생한 이벤트를 부모에게 전달하지 않는다!!
+          event.stopPropagation();
+          alert("Child clicked!");
+          console.log("Child clicked!");
+        });
+    </script>
+  </body>
+</html>

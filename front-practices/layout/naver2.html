@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>네이버 클론</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f6f6f6;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      header {
+        background-color: #2db400;
+        padding: 10px 0;
+      }
+
+      .logo a {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      nav ul li {
+        margin-left: 20px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+      }
+
+      .search-bar {
+        background-color: white;
+        padding: 20px 0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .search-bar form {
+        display: flex;
+        justify-content: center;
+      }
+
+      .search-bar input[type="text"] {
+        width: 60%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px;
+      }
+
+      .search-bar button {
+        padding: 10px 20px;
+        background-color: #2db400;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 0 5px 5px 0;
+      }
+
+      .main-content {
+        display: flex; /* Flexbox 레이아웃 설정 */
+        padding: 20px 0;
+      }
+
+      .content-left {
+        width: 70%;
+        padding-right: 20px;
+      }
+
+      .content-right {
+        width: 30%;
+      }
+
+      .main-content h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .news-item,
+      .shopping-item {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .news-item h3,
+      .shopping-item h3 {
+        margin-bottom: 10px;
+        color: #2db400;
+      }
+
+      footer {
+        background-color: #2db400;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      footer p {
+        color: white;
+        font-size: 14px;
+      }
+      .content-left {
+        min-width: 300px;
+      }
+      .content-right {
+        min-width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <a href="#">NAVER</a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#">메일</a></li>
+            <li><a href="#">카페</a></li>
+            <li><a href="#">블로그</a></li>
+            <li><a href="#">지식iN</a></li>
+            <li><a href="#">쇼핑</a></li>
+            <li><a href="#">뉴스</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section class="search-bar">
+      <div class="container">
+        <form action="#">
+          <input type="text" placeholder="검색어를 입력하세요" />
+          <button type="submit">검색</button>
+        </form>
+      </div>
+    </section>
+    <section class="main-content">
+      <div class="container">
+        <div class="content-left">
+          <h2>오늘의 뉴스</h2>
+          <article class="news-item">
+            <h3>헤드라인 뉴스 제목</h3>
+            <p>여기에 뉴스 내용이 들어갑니다.</p>
+          </article>
+          <article class="news-item">
+            <h3>헤드라인 뉴스 제목</h3>
+            <p>여기에 뉴스 내용이 들어갑니다.</p>
+          </article>
+        </div>
+        <div class="content-right">
+          <h2>쇼핑</h2>
+          <div class="shopping-item">
+            <h3>쇼핑 아이템 제목</h3>
+            <p>여기에 쇼핑 아이템 설명이 들어갑니다.</p>
+          </div>
+          <div class="shopping-item">
+            <h3>쇼핑 아이템 제목</h3>
+            <p>여기에 쇼핑 아이템 설명이 들어갑니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 NAVER</p>
+      </div>
+    </footer>
+  </body>
+</html>
