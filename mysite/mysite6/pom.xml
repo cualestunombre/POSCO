@@ -99,14 +99,15 @@
 	</dependencies>
 
 	<build>
+		<finalName>mysite6</finalName>
 		<plugins>
-			<!-- No need for spring-boot-maven-plugin when packaging as WAR -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.3.2</version> <!-- Adjust version if needed -->
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
 				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml> <!-- Since we are using Servlet 4.0+ -->
+					<url>${tomcat.deploy.url}</url>
+					<server>tomcat-poscodx</server>
 				</configuration>
 			</plugin>
 		</plugins>
