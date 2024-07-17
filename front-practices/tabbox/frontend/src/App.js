@@ -2,8 +2,9 @@ import React,{useState} from 'react';
 import TabView  from './TabView';
 import ListItem from './ListItem';
 import Active  from './Active';
-import Styles from '../public/styles.css';
+import * as styles from '../public/styles.css';
 function App() {
+    console.log(styles); 
     const [curTab,setCurTab] = useState(0);
     const [isActive,setIsActive] = useState(false);
     const [tabs,setTabs] = useState(  [
@@ -13,6 +14,9 @@ function App() {
         {no:3, name:'메뉴4',contents: '메뉴4의 뷰 내용'},
         {no:4, name:'메뉴5', contents: '메뉴5의 뷰 내용'}
     ]);
+
+    
+
 
     const handleClick = (no)=>{
         setCurTab(no);
