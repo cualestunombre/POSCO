@@ -29,11 +29,11 @@ public class UserService {
 	}
 	
 	public UserVo getUser(String email) {
-		return userRepository.findByEmail(email,UserVo.class);
+		return userRepository.findByEmail(email, UserVo.class);
 	}
-	
 
 	public void update(UserVo vo) {
+		vo.setPassword(vo.getPassword().equals("") ? "" : passwordEncoder.encode(vo.getPassword()));
 		userRepository.update(vo);
 	}
 }

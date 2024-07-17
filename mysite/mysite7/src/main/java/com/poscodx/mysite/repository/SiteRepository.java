@@ -14,10 +14,10 @@ public class SiteRepository {
 	}
 	
 	public SiteVo find() {
-		return sqlSession.selectOne("site.findOldest");
+		return sqlSession.selectOne("site.find");
 	}
 
 	public void update(SiteVo vo) {
-		sqlSession.insert("site.insert", vo);
+		sqlSession.update("site.update", vo);
 	}	
 }

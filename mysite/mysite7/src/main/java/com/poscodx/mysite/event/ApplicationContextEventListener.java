@@ -22,7 +22,6 @@ public class ApplicationContextEventListener {
 	
 		SiteService siteService = applicationContext.getBean(SiteService.class);
 		SiteVo vo = siteService.getSite();
-	
 		
 		MutablePropertyValues propertyValues = new MutablePropertyValues();
 		propertyValues.add("title", vo.getTitle());

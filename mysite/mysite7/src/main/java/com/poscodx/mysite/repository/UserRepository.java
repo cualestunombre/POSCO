@@ -32,23 +32,18 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findByNo", no);
 	}
 
-
-	
-	public <R extends UserVo> R findByEmail(String email,Class<R> resultType) {
-		FindByEmailResultHandler<R> findByEmailResultHandler = new FindByEmailResultHandler<>(resultType);
-		
-		sqlSession.select("user.findByEmail",email,findByEmailResultHandler);
-		
-		return findByEmailResultHandler.result;
-
-		
-	}
-
 	public int update(UserVo vo) {
 		return sqlSession.update("user.update", vo);
 	}
 	
-	private class FindByEmailResultHandler<R> implements ResultHandler<Map<String,Object>>{
+	public <R> R findByEmail(String email, Class<R> resultType) {
+		FindByEmailResultHandler<R> findByEmailResultHandler = new FindByEmailResultHandler<>(resultType);
+		sqlSession.select("user.findByEmail", email, findByEmailResultHandler);
+		
+		return findByEmailResultHandler.result;
+	}
+	
+	private class FindByEmailResultHandler<R> implements ResultHandler<Map<String, Object>> {
 		private R result;
 		private Class<R> resultType;
 		
@@ -61,6 +56,5 @@ public class UserRepository {
 			Map<String, Object> resultMap = resultContext.getResultObject();
 			result = new ObjectMapper().convertValue(resultMap, resultType);
 		}
-		
 	}
 }

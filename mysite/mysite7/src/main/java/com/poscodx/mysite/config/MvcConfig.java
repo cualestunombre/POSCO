@@ -1,45 +1,61 @@
 package com.poscodx.mysite.config;
 
-import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.List;
-
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.thymeleaf.spring5.ISpringTemplateEngine;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
-@Configuration
+import com.poscodx.mysite.event.ApplicationContextEventListener;
+import com.poscodx.mysite.interceptor.SiteInterceptor;
+
+@SpringBootConfiguration
 public class MvcConfig implements WebMvcConfigurer {
-
-	// View Resolver
+	// Locale Resolver
 	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		// 뷰객체를 설정한다
-		viewResolver.setViewClass(JstlView.class);
-		viewResolver.setPrefix("/WEB-INF/views/");
-		viewResolver.setSuffix(".jsp");
-		viewResolver.setExposeContextBeansAsAttributes(true);
-		viewResolver.setExposedContextBeanNames("site");
+	public LocaleResolver localeResolver() {
+		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+		localeResolver.setCookieName("lang");
+		localeResolver.setCookieHttpOnly(false);
 		
+		return localeResolver;
+	}
+	
+	// Thymeleaf View Resolver
+	@Bean
+	public ViewResolver thymeleafViewResolver(ISpringTemplateEngine templateEngine) {
+		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+
+		viewResolver.setTemplateEngine(templateEngine);
+		viewResolver.setCharacterEncoding("UTF-8");
+
 		return viewResolver;
 	}
 	
+	// Site Interceptor
+	@Bean
+	public HandlerInterceptor siteInterceptor() {
+		return new SiteInterceptor();
+	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry
+			.addInterceptor(siteInterceptor())
+			.addPathPatterns("/**")
+			.excludePathPatterns("/assets/**");
+	}
 
-
-
-
-
-   
+	// ApplicationContext Event Listener
+	@Bean
+	public ApplicationContextEventListener applicationContextEventListener() {
+		return new ApplicationContextEventListener();
+	}
 }

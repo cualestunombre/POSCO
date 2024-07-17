@@ -12,18 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.poscodx.mysite.security.Auth;
-import com.poscodx.mysite.security.AuthUser;
 import com.poscodx.mysite.service.UserService;
 import com.poscodx.mysite.vo.UserVo;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
-	
 	@Autowired
 	private UserService userService;
 	
@@ -61,13 +55,20 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login")
-	public String login(@RequestParam(required=false) String result) {
+	public String login() {
 		return "user/login";
 	}
 	
-
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(Authentication authentication, Model model) {
+//      1. SecurityContextHolder(Spring Security ThreadLocal Helper Class) 기반		
+//		SecurityContext sc = SecurityContextHolder.getContext();
+//		Authentication authentication = sc.getAuthentication();
+
+//      2. HttpSession 기반		
+//		SecurityContext sc = (SecurityContext)session.getAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY)
+//		Authentication authentication = sc.getAuthentication();
+
 		UserVo authUser = (UserVo)authentication.getPrincipal();
 		UserVo vo = userService.getUser(authUser.getNo());
 		model.addAttribute("userVo", vo);
@@ -75,26 +76,14 @@ public class UserController {
 		return "user/update";
 	}
 	
-
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(Authentication authentication, UserVo vo) {
 		UserVo authUser = (UserVo)authentication.getPrincipal();
 		vo.setNo(authUser.getNo());
+		
 		userService.update(vo);
 		
 		authUser.setName(vo.getName());
 		return "redirect:/user/update";
 	}
-
-	/*
-	 * java 설정시 인터셉터를 쓰더라도, controller단에서 매치되는 url이 있어야 한다
-	 */
-	@RequestMapping("/auth")
-	public void auth() {
-	}
-
-	@RequestMapping("/logout")
-	public void logout() {
-	}
-	
 }
