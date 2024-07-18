@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import RegisterForm from './RegisterForm';
-import SearchBar from './SearchBar';
 import Emaillist from './Emaillist';
 import axios from 'axios';
 function App(props) {
@@ -9,7 +8,7 @@ function App(props) {
     ]);
 
     useEffect(()=>{
-        axios.get("http://localhost:8040/emails")
+        axios.get("http://localhost:9090/emails")
         .then(e=>{
             
             setList([...e.data]);
@@ -21,8 +20,7 @@ function App(props) {
     return (
         <div id="App">
             <RegisterForm list={list} setList={setList}/>
-            <SearchBar/>
-            <Emaillist list={list}/>
+            <Emaillist list={list} setList={setList}/>
         </div>
     );
 }

@@ -5,7 +5,7 @@ module.exports = function(env) {
         mode: "none",
         entry: path.resolve(`src/index.js`),
         output: {
-            path: path.resolve('public'),
+            path: path.resolve('../backend'),
             filename: 'assets/js/main.js',
             assetModuleFilename: 'assets/images/[hash][ext]'
         },
@@ -39,7 +39,10 @@ module.exports = function(env) {
             port: 9090,
             liveReload: true,
             compress: true,
-            hot: false
+            hot: false,
+            proxy:[
+                {context:"/emails",target:"http://localhost:8040"}
+            ]
         }    
     };
 }

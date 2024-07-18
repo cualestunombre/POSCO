@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import * as styles from './assets/css/styles.css';
 import TaskList from './TaskList';
@@ -5,8 +6,18 @@ import TaskList from './TaskList';
 export default function({ detail,setter }) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleToggle = () => {
-        setIsOpen(!isOpen);
+    const handleToggle = async() => {
+        setIsOpen(prev=>!prev);
+        const res = await axios.get(`/api/tasks?cardNo=${detail.no}`);
+        console.log(res);
+        setter(prev=>{
+            return prev.map(v=>{
+                if (v.no == detail.no) return {...v, tasks:res.data.data};
+                return v;
+            });
+        });
+            
+
     };
 
     return (

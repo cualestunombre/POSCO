@@ -14,5 +14,7 @@ public class LandingController {
 		log.info("인덱스 페이지 출력");return "index";
 
 
+
+
 	}
 }

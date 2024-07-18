@@ -8,7 +8,7 @@ export default function ({list,setList}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8040/emails",
+        axios.post("http://localhost:9090/emails",
         {
             firstName, lastName, email
         }).then(e=>{
