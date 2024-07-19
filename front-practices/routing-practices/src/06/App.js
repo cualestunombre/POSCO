@@ -8,21 +8,27 @@ import {Guestbook} from "./component/guestbook";
 import {Gallery} from "./component/gallery";
 import {Login, Join} from "./component/user";
 import {Error404} from "./component/error";
-
+import {SiteLayout} from "./layout"
 import './assets/scss/App.scss'
+
+const AppRoutes = () => {
+    return useRoutes([
+        { path: '/', element: <Main /> },
+        { path: '/gallery', element: <Gallery /> },
+        { path: '/guestbook', element: <Guestbook /> },
+        { path: '/about', element: <About /> },
+        { path: '/user/join', element: <Join /> },
+        { path: '/user/login', element: <Login /> },
+        { path: '*', element: <Error404 /> }
+    ]);
+}
 
 export default function App() {
     return (
         <Router>
-            <Routes>
-                <Route path='/' element={<Main />}/>
-                <Route path='/gallery' element={<Gallery />}/>
-                <Route path='/guestbook' element={<Guestbook />}/>
-                <Route path='/about' element={<About />}/>
-                <Route path='/user/join' element={<Join />}/>
-                <Route path='/user/login' element={<Login />}/>
-                <Route path='*' element={<Error404 />}/>
-            </Routes>
+            <SiteLayout>
+                <AppRoutes />
+            </SiteLayout>
         </Router>
     );
 }

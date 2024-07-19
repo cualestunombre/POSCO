@@ -4,7 +4,7 @@ import '../assets/scss/layout/Header.scss';
 export default function Header() {
     return (
         <header>
-            <h1>Header</h1>
+            <h1>느그STIE</h1>
         </header>
     );
 }

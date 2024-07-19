@@ -6,19 +6,30 @@ import Gallery from "./component/Gallery";
 import Guestbook from "./component/Guestbook";
 import About from "./component/About";
 import Error404 from "./component/Error404";
+import Header from './layout/Header';
+import Navigation from "./layout/Navigation";
+import Footer from "./layout/Footer";
 
 import './assets/scss/App.scss'
 
 export default function App() {
     return (
-        <Router>
-            <Routes>
-                <Route path='/' element={<Main />}/>
-                <Route path='/gallery' element={<Gallery />}/>
-                <Route path='/guestbook' element={<Guestbook />}/>
-                <Route path='/about' element={<About />}/>
-                <Route path='*' element={<Error404 />}/>
-            </Routes>
-        </Router>
+        <>
+            
+
+            <Router>
+                <Header/>
+                <Navigation/>
+                <Routes>
+                    <Route path='/' element={<Main />}/>
+                    <Route path='/gallery' element={<Gallery />}/>
+                    <Route path='/guestbook' element={<Guestbook />}/>
+                    <Route path='/about' element={<About />}/>
+                    <Route path='*' element={<Error404 />}/>
+                </Routes>
+                <Footer/>
+            </Router>
+           
+        </>
     );
 }

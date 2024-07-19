@@ -10,7 +10,8 @@ import {
 import styles from './Counter.module.css'
 
 export default function Counter() {
-  const count = useSelector(selectCount)
+  // useSelector 안에 있는 변수가 감시 대상이다
+  const count = useSelector(selectCount);
   const dispatch = useDispatch()
   const [incrementAmount, setIncrementAmount] = useState(1)
 
@@ -46,7 +47,7 @@ export default function Counter() {
     </button>
     <input type="number" value={incrementAmount} onChange={(e)=>setIncrementAmount(e.target.value)}></input>
       </div>
-
+    <!-- -->
 
       {/* omit additional rendering output here */}
     </div>

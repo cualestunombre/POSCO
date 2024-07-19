@@ -1,8 +1,6 @@
 package com.poscodx.kanbanboard.controller;
 
 import com.poscodx.kanbanboard.dto.JsonResult;
-import com.poscodx.kanbanboard.repository.CardRepository;
-import com.poscodx.kanbanboard.repository.TaskRepository;
 import com.poscodx.kanbanboard.service.KanbanService;
 import com.poscodx.kanbanboard.vo.TaskVo;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {Routes, Route} from 'react-router';
 
@@ -14,6 +14,10 @@ import {Error, Error404} from "./component/error";
 import './assets/scss/App.scss'
 
 export default function App() {
+
+
+
+
     return (
         <Router>
             <Routes>
@@ -27,6 +31,7 @@ export default function App() {
                     <Route path='error' element={<Error />}/>
                     <Route path='*' element={<Error404 />}/>
                 </Route>
+                
             </Routes>
         </Router>
     );
