@@ -47,9 +47,9 @@ export default function Counter() {
     </button>
     <input type="number" value={incrementAmount} onChange={(e)=>setIncrementAmount(e.target.value)}></input>
       </div>
-    <!-- -->
-
-      {/* omit additional rendering output here */}
+  
+      
+      {/* omit additional rendering output here */ }
     </div>
   )
 }

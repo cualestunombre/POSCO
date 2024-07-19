@@ -1,38 +1,39 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import * as styles from './assets/css/styles.css';
 import TaskList from './TaskList';
 
-export default function({ detail,setter }) {
+export default memo(function({
+    detail,
+    handleToggle,
+    insertTask,
+    handleCheckboxChange,
+    onTaskDelete,
+}) {
     const [isOpen, setIsOpen] = useState(false);
-
-    const handleToggle = async() => {
-        setIsOpen(prev=>!prev);
-        const res = await axios.get(`/api/tasks?cardNo=${detail.no}`);
-        console.log(res);
-        setter(prev=>{
-            return prev.map(v=>{
-                if (v.no == detail.no) return {...v, tasks:res.data.data};
-                return v;
-            });
-        });
-            
-
-    };
 
     return (
         <div className={styles._Card}>
-            <div 
+            <div
                 className={`${styles.Card_Title} ${isOpen ? styles.Card_Title_Open : ''}`}
-                onClick={handleToggle} 
+                onClick={() => {
+                    handleToggle(detail);
+                    setIsOpen((prev) => !prev);
+                }}
             >
                 {detail.title}
             </div>
-            {   isOpen && 
+            {isOpen && (
                 <div className="Card_Details">
-                    <TaskList no={detail.no} setter={setter} tasks={detail.tasks} />
+                    <TaskList
+                        no={detail.no}
+                        handleCheckboxChange={handleCheckboxChange}
+                        insertTask={insertTask}
+                        onTaskDelete={onTaskDelete}
+                        tasks={detail.tasks}
+                    />
                 </div>
-            }  
+            )}
         </div>
     );
-}
+});

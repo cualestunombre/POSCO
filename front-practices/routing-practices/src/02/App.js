@@ -28,7 +28,6 @@ export default function App() {
 
     useEffect(() => {
         const currentPath = window.location.pathname;
-        console.log(currentPath);
         setRoute({ page: currentPath }); 
       }, []);
     

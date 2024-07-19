@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Linkm,NavLink} from 'react-router-dom';
 
 export default function Guestbook() {
     return (
@@ -7,13 +7,13 @@ export default function Guestbook() {
             <h1>Guestbook</h1>
             <ul>
                     <li>
-                        <Link to={'/'}>[Main]</Link>
+                        <NavLink to={'/'}>[Main]</NavLink>
                     </li>
                     <li>     
-                        <Link to={'/guestbook'}>[Guestbook]</Link> 
+                        <NavLink to={'/guestbook'}>[Guestbook]</NavLink> 
                     </li>
                     <li>    
-                        <Link to={'/gallery'}>[Gallery]</Link> 
+                        <NavLink to={'/gallery'}>[Gallery]</NavLink> 
                     </li>
                 </ul>
         </div>

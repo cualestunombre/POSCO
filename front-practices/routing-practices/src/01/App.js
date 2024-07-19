@@ -8,7 +8,6 @@ export default function App() {
     const [route, setRoute] = useState('');
 
     const handlerHashChange = useCallback(() => {
-        console.log(window.location.hash);
         setRoute(window.location.hash.substring(1));
     }, []); 
 
