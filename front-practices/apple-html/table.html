@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      td {
+        border: 1px solid black;
+      }
+      table {
+        /*
+            cell간의 간격을 없앤다
+          */
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        뉴스기사
+        <!-- 제목 행-->
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+            <p>ddddddddd</p>
+            <p>ddddddddd</p>
+          </th>
+          <td style="vertical-align: top">2</td>
+          <td style="vertical-align: bottom">3</td>
+        </tr>
+        <tr>
+          <th>김</th>
+          <td>문</td>
+          <td>수</td>
+        </tr>
+      </tbody>
+      <!--일반 행은 tbody 안에-->
+    </table>
+    <div>
+      <!-- vertical-align의 예시
+        용도1. inline/inline-block 요소 간의 세로 정렬에 쓰인다.
+
+        용도2. table안에서 세로 정렬할 때 vertical-align을 사용한다
+        (top/middle/bottom 가능)
+    -->
+      <p style="font-size: 50px">
+        <span>Greetings</span>
+        <span style="font-size: 15px; vertical-align: middle">ㅋㅋ</span>
+        <span style="font-size: 15px; vertical-align: top">ㅋㅋ</span>
+        <span style="font-size: 15px; vertical-align: bottom">ㅋㅋ</span>
+      </p>
+    </div>
+  </body>
+</html>

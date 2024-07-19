@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .container {
+        background-color: lightblue;
+        width: 70%;
+        min-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 450px;
+      }
+      .inner-container {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+      }
+      h1 {
+        font-weight: 300;
+        color: navy;
+        padding-top: 20px;
+        margin-top: 0px;
+      }
+      table {
+        background-color: white;
+        border-radius: 10px;
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+      }
+
+      .text-box {
+        margin-left: 30px;
+        vertical-align: 1em;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="inner-container">
+        <h1>Your Shopping Cart</h1>
+        <table>
+          <thead>
+            <tr style="height: 50px; border-bottom: 1px solid navy">
+              <th style="width: 50%">ITEM</th>
+              <th>AMOUNT</th>
+              <th>PRICE</th>
+              <th>TOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="height: 80px; border-bottom: 1px solid navy">
+              <td style="text-align: left; vertical-align: middle">
+                <img
+                  style="width: 70px; height: 65px; margin-left: 20px"
+                  src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-card-40-iphone14-202209_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1693086370007"
+                />
+                <div class="text-box">APPLE<br />IPHONE</div>
+              </td>
+              <td>1</td>
+              <td>1979.00$</td>
+              <td>1979.00$</td>
+            </tr>
+            <tr style="height: 80px; border-bottom: 1px solid navy">
+              <td style="text-align: left; vertical-align: middle">
+                <img
+                  style="width: 70px; height: 65px; margin-left: 20px"
+                  src="https://wimg.mk.co.kr/news/cms/202311/08/news-p.v1.20231108.0111b8a8a2f94805b1535af2dc97bf72_P1.jpg"
+                />
+                <div class="text-box">SAMSUNG<br />GALAXY</div>
+              </td>
+              <td>1</td>
+              <td>989.00$</td>
+              <td>989.00$</td>
+            </tr>
+            <tr style="height: 50px">
+              <td colspan="4" style="text-align: right; padding-right: 25px">
+                2968.00$
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
