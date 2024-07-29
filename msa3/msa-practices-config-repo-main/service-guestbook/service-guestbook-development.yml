@@ -1,0 +1,30 @@
+# configuration: development
+spring:
+
+   devtools:
+      livereload:
+         enabled: true
+                     
+   datasource:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mariadb://192.168.64.8:3306/webdb?charset=utf8
+      username: webdb
+      password: '{cipher}AQCo9bK6bvblpsMz9jo16XUMEb1/uXxuFj9QTmPdWpqFh8Nd5CP9A9dqzAzBLQLKtI+TC6crhkd3Kz5vk8RZcFGMCTuMzxDS87sj+PRcuSJZ5/Xk7neSsse+0TOkrU2iPYcmiumoX4DumW6cwiC1jCJif5kVMYVCDFkUeSRc4UcpdvdkxCBhIjakGSh/2hlhuEPP6xHddzRZkC+09SkoaNOLo12HV0vmvnErASM7Y3VLybvLdxYzhaOuFAb+zHEhqyR7/YmCGWBoI9QkebxxRgNbbUw8NRSOuhwXAy1fwPH+Q+xxbWbplBKtcrG/Jur1jY5zQGZSq/SuyGuXqVvUdYzTnq5S6BN/GypcCdcKcoV5ot5acq4m1b1Yv4wX2+mJ4w4='
+      hikari:
+         minimum-idle: 10
+         maximum-pool-size: 20
+
+logging:
+   pattern:
+      console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"
+   level:
+      root: INFO
+
+eureka:
+   instance:
+      preferIpAddress: true
+   client:
+      fetchRegistry: true
+      registerWithEureka: true
+      serviceUrl:
+         defaultZone: http://localhost:8761/eureka  

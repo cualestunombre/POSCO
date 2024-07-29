@@ -1,0 +1,5 @@
+service-*
+
+1. configuration client 기능 추가
+2. [참고] _docs/07.Service Config Server.txt
+   <4> Config Clients

@@ -1,0 +1,11 @@
+# configuration: default
+mybatis:
+   config-location: classpath:mybatis/configuration.xml
+
+server:
+   port: 0
+   servlet:
+      context-path: /
+      encoding:
+         charset: utf-8
+         enabled: true   

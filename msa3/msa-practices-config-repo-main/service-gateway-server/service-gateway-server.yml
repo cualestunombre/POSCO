@@ -1,0 +1,62 @@
+# common configuration
+
+server:
+   port: 8888
+
+management:
+   endpoint:
+      gateway:
+         enabled: true    # default value
+   endpoints:
+      web:
+         exposure:
+            include: "*"
+
+spring:
+   cloud:
+      gateway:
+         globalcors:
+            cors-configurations:
+               '[/**]':
+                  allowedOrigins: '*'
+                  allowedHeaders: '*'
+                  allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS                   
+      
+         discovery.locator:
+            enabled: true
+            lowerCaseServiceId: true
+         routes:
+         
+         - id: service-emaillist
+           uri: lb://service-emaillist
+           predicates:
+           - Path=/api/emaillist/**
+           filters:
+           - RewritePath=/api/emaillist/?(?<remaining>.*), /$\{remaining}
+
+         - id: service-guestbook
+           uri: lb://service-guestbook
+           predicates:
+           - Path=/api/guestbook/**
+           filters:
+           - RewritePath=/api/guestbook/?(?<remaining>.*), /$\{remaining}
+
+         - id: service-gallery
+           uri: lb://service-gallery
+           predicates:
+           - Path=/api/gallery/**
+           filters:
+           - RewritePath=/api/gallery/?(?<remaining>.*), /$\{remaining}
+
+         - id: service-storage
+           uri: lb://service-storage
+           predicates:
+           - Path=/api/storage/**
+           filters:
+           - RewritePath=/api/storage/?(?<remaining>.*), /$\{remaining}
+           
